@@ -1,11 +1,13 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.views import generic
 from django.db.models import F
 
 from .models import Choice, Question
 
 class IndexView(generic.ListView):
+    # Default: <app name>/<model name>_list.html
     template_name = "todoDB/index.html"
     context_object_name = "latest_question_list"
 
@@ -16,11 +18,12 @@ class IndexView(generic.ListView):
 # Recibir id de pregunta y mostrar formulario
 class DetailView(generic.DetailView):
     model = Question
-    template_name = "todoDB/details.html"
+    template_name = "todoDB/detail.html"
 
 
 class ResultsView(generic.DetailView):
     model = Question
+    # Default: <app name>/<model name>_detail.html
     template_name = "todoDB/results.html"
 
 

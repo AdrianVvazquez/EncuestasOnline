@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -12,8 +14,8 @@ class IndexView(generic.ListView):
     context_object_name = "latest_question_list"
 
     def get_queryset(self):
-        # return the latest 5 poll questions in the system, according to publication date
-        return Question.objects.order_by("-pub_date")[:5]
+        # return the latest 5 published questions in the system, according to publication date
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
 
 # Recibir id de pregunta y mostrar formulario
 class DetailView(generic.DetailView):

@@ -17,7 +17,7 @@ class IndexView(generic.ListView):
         # return the latest 5 published questions in the system, according to publication date
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
 
-# Recibir id de pregunta y mostrar formulario
+# Recibir id de pregunta y mostrar formulario para votar
 class DetailView(generic.DetailView):
     model = Question
     template_name = "todoDB/detail.html"

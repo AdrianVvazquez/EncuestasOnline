@@ -1,0 +1,40 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}Encuestas{% endblock title %}
+
+{% block main %}
+    <section>
+    {% if latest_question_list %}
+        <ul class="list-group list-group-flush">
+        {% for question in latest_question_list %}
+                            <!-- 'app_name:path_name' parametros -->
+            <li class="list-group-item"><a href="{% url 'encuestas:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nada por aquí. Espera a que se publiquen nuevas encuestas.</p>
+    {% endif %}
+    </section>
+    <hr/>
+{% endblock main %}
+
+{% block scripts %}
+<script>
+    cnt = true;
+    $(document).ready(function(){
+        // Cambiar la pestaña activa del navbar
+        $('#index-nav').removeClass('active');
+        $('#index-nav').attr('aria-current', 'none');
+        $('#polls-nav').addClass('active');
+        $('#polls-nav').attr('aria-current', 'polls-nav');
+
+        $('#show-new-question-btn').click(function(e){
+            button = e.target;
+            button_text = button.classList.contains('collapsed')? "New question":"Cancel";
+            button.innerText = button_text;
+        })
+
+    })
+</script>
+{% endblock scripts %}

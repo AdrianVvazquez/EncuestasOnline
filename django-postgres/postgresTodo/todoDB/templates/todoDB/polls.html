@@ -29,12 +29,6 @@
         $('#polls-nav').addClass('active');
         $('#polls-nav').attr('aria-current', 'polls-nav');
 
-        $('#show-new-question-btn').click(function(e){
-            button = e.target;
-            button_text = button.classList.contains('collapsed')? "New question":"Cancel";
-            button.innerText = button_text;
-        })
-
     })
 </script>
 {% endblock scripts %}

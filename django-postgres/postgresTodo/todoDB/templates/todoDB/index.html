@@ -1,28 +1,32 @@
 {% extends "./base.html" %}
 {% load static %}
 
-{% block title %}
-Inicio
-{% endblock title %}
+{% block title %}Inicio{% endblock title %}
 
 {% block main %}
-<header>
-    <nav>
-        <ul>
-            <li><a href="{% url 'encuestas:index' %}">Inicio</a></li>
-        </ul>
-    </nav>
-</header>
 <section>
-    {% if latest_question_list %}
-        <ul>
-        {% for question in latest_question_list %}
-                            <!-- 'app_name:path_name' parametros -->
-            <li><a href="{% url 'encuestas:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>Nada por aquí. Espera a que se publiquen nuevas encuestas.</p>
-    {% endif %}
+    <p>
+        <button id="show-new-question-btn" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiv" aria-expanded="false" aria-controls="collapseDiv">
+            New question
+        </button>
+    </p>
+    <div id="collapseDiv" class="collapse">
+        <div class="card card-body bg-primary-subtle">
+            Form in process ...
+        </div>
+    </div>
 </section>
 {% endblock main %}
+
+
+{% block scripts %}
+<script src="{% static 'todoDB/rightSideBar.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        $('#polls-nav').removeClass('active');
+        $('#polls-nav').attr('aria-current', 'none');
+        $('#index-nav').attr('aria-current', 'polls-nav');
+        $('#index-nav').addClass('active');
+    })
+</script>
+{% endblock scripts %}

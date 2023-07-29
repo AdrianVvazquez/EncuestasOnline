@@ -3,14 +3,19 @@ from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.views import generic
+from django.views import generic, View
 from django.db.models import F
 
 from .models import Choice, Question
 
-class IndexView(generic.ListView):
-    # Default: <app name>/<model name>_list.html
-    template_name = "todoDB/index.html"
+class IndexView(View):
+    # template_name = "todoDB/index.html"
+    def get(self, request, *args, **kwargs):
+        return render(request, "todoDB/index.html")
+
+class PollsView(generic.ListView):
+    # Default View name: <app name>/<model name>_list.html
+    template_name = "todoDB/polls.html"
     context_object_name = "latest_question_list"
 
     def get_queryset(self):

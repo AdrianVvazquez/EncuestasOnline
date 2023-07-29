@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from todoDB import views
 
 urlpatterns = [
+    path("", views.IndexView.as_view(), name="index"),
     path("encuestas/", include("todoDB.urls")),
     path("admin/", admin.site.urls),
 ]

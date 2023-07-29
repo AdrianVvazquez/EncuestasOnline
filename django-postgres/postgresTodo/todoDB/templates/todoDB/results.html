@@ -1,21 +1,10 @@
+{% extends "./base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'todoDB/style.css' %}">
-    <title>Resultados</title>
-</head>
+
+{% block title %}Resultados{% endblock title %}
+
+{% block main %}
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'encuestas:index' %}">Inicio</a></li>
-            </ul>
-        </nav>
-    </header>
     <section>
         <h1>{{ question.question_text }}</h1>
 
@@ -30,4 +19,4 @@
 </body>
 </html>
 
-
+{% endblock main %}
